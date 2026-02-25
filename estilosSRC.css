@@ -1,0 +1,43 @@
+html{
+    background-color: rgb(245, 228, 122);
+}
+
+button {
+    background-color: rgb(250, 185, 56)
+}
+
+input[type="text"]:hover{
+    background-color: rgb(250, 185, 56);
+}
+
+input[type="text"]{
+    background-color: rgb(255, 250, 214);
+}
+
+input[type="radio"]:checked{
+    accent-color: rgb(250, 185, 56); 
+}
+
+input[type="checkbox"]:checked{
+    accent-color: rgb(250, 185, 56);   
+}
+
+input[type="checkbox"]{
+    background-color: rgb(250, 185, 56);   
+}
+
+select{
+    background-color: rgb(255, 250, 214);
+}
+
+.container {
+    border-radius: 2px;
+    width: 250px;
+    height: auto;
+    border: 2px solid #000;
+    background-color: rgb(255, 250, 214);
+}
+
+.resaltado{
+    background-color: rgb(250, 185, 56);;
+}
