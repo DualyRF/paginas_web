@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIM · Facultad de Ingeniería Mochis — UAS</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-dark: #922B21;
+    --red-light: #E74C3C;
+    --cream: #FAF8F5;
+    --dark: #141210;
+    --mid: #3D3530;
+    --muted: #8C7B75;
+    --border: #E8E0DA;
+    --accent: #D4A843;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    background: rgba(20,18,16,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-badge {
+    width: 36px; height: 36px;
+    background: var(--red);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 14px;
+    color: white; letter-spacing: -0.5px;
+  }
+  .nav-logo-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600; font-size: 14px;
+    color: white; letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .nav-logo-text span { display: block; font-weight: 300; font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.08em; }
+
+  .nav-links {
+    display: flex; gap: 2px; align-items: center;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 13px; font-weight: 400;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-links .nav-cta {
+    background: var(--red);
+    color: white !important;
+    font-weight: 500;
+    margin-left: 8px;
+  }
+  .nav-links .nav-cta:hover { background: var(--red-light) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(192,57,43,0.1);
+    border: 1px solid rgba(192,57,43,0.2);
+    border-radius: 100px;
+    padding: 5px 14px 5px 8px;
+    font-size: 12px; font-weight: 500;
+    color: var(--red); letter-spacing: 0.04em;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+  .hero-tag-dot {
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 5.5vw, 68px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--dark);
+    margin-bottom: 24px;
+  }
+  .hero-title .accent { color: var(--red); }
+  .hero-title .line-indent { padding-left: 60px; display: block; }
+
+  .hero-desc {
+    font-size: 16px; font-weight: 300;
+    color: var(--muted); line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--red);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(192,57,43,0.35); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { border-color: var(--dark); background: rgba(0,0,0,0.03); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800;
+    color: var(--dark); letter-spacing: -0.02em;
+  }
+  .stat-num span { color: var(--red); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; letter-spacing: 0.03em; }
+
+  .hero-right {
+    position: relative;
+    background: var(--dark);
+    overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 60px;
+  }
+
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-red-blob {
+    position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(192,57,43,0.4) 0%, transparent 70%);
+    filter: blur(40px);
+  }
+  .hero-accent-blob {
+    position: absolute; bottom: 50px; left: -50px;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(212,168,67,0.15) 0%, transparent 70%);
+    filter: blur(30px);
+  }
+
+  .hero-card-stack {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+  }
+
+  .floating-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 20px 24px;
+    backdrop-filter: blur(20px);
+    position: absolute;
+  }
+  .card-main {
+    position: relative;
+    width: 280px;
+    animation: float1 6s ease-in-out infinite;
+  }
+  .card-side {
+    width: 220px;
+    top: 100px; left: 60px;
+    animation: float2 7s ease-in-out infinite;
+  }
+  @keyframes float1 {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-12px) rotate(-2deg); }
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translateY(0px) rotate(1.5deg); }
+    50% { transform: translateY(-8px) rotate(1.5deg); }
+  }
+
+  .card-label { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; margin-bottom: 8px; }
+  .card-title { font-family: 'Syne', sans-serif; font-size: 15px; color: white; font-weight: 600; margin-bottom: 4px; }
+  .card-sub { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .card-badge {
+    display: inline-block;
+    background: rgba(192,57,43,0.3);
+    border: 1px solid rgba(192,57,43,0.5);
+    color: #ff9e8e;
+    font-size: 10px; padding: 3px 10px;
+    border-radius: 100px; margin-top: 12px;
+    font-weight: 500;
+  }
+
+  .hero-bottom-info {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .info-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    background: var(--red);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-size: 18px;
+  }
+  .info-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+  .info-text strong { color: white; font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 80px; }
+  .section-tag {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    color: var(--red); text-transform: uppercase; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-tag::before {
+    content: ''; width: 20px; height: 2px; background: var(--red);
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(30px, 3.5vw, 46px);
+    font-weight: 800; letter-spacing: -0.025em;
+    color: var(--dark); line-height: 1.1;
+  }
+  .section-title .muted { color: var(--muted); }
+
+  /* ── CARRERAS ── */
+  .carreras { background: white; }
+  .carreras-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 56px;
+  }
+  .carreras-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .carrera-card {
+    background: var(--cream);
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 0;
+  }
+  .carrera-card:first-child { border-radius: 16px 0 0 0; }
+  .carrera-card:nth-child(3) { border-radius: 0 16px 0 0; }
+  .carrera-card:nth-child(4) { border-radius: 0 0 0 16px; }
+  .carrera-card:last-child { border-radius: 0 0 16px 0; }
+  .carrera-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .carrera-card:hover { background: var(--dark); }
+  .carrera-card:hover::before { transform: scaleX(1); }
+  .carrera-card:hover .carrera-name { color: white; }
+  .carrera-card:hover .carrera-desc { color: rgba(255,255,255,0.5); }
+  .carrera-card:hover .carrera-num { color: rgba(255,255,255,0.1); }
+  .carrera-card:hover .carrera-tag { background: rgba(192,57,43,0.3); color: #ff9e8e; }
+
+  .carrera-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 60px; font-weight: 800;
+    color: rgba(0,0,0,0.05);
+    line-height: 1; margin-bottom: 20px;
+    transition: color 0.3s;
+  }
+  .carrera-icon { font-size: 28px; margin-bottom: 16px; }
+  .carrera-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--dark); line-height: 1.3;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  .carrera-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.6;
+    transition: color 0.3s;
+  }
+  .carrera-tag {
+    display: inline-block; margin-top: 16px;
+    background: rgba(192,57,43,0.08);
+    color: var(--red);
+    font-size: 11px; font-weight: 600;
+    padding: 4px 12px; border-radius: 100px;
+    letter-spacing: 0.04em;
+    transition: all 0.3s;
+  }
+
+  /* ── NOTICIAS ── */
+  .noticias { background: var(--cream); }
+  .noticias-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+
+  .noticias-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .noticia-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .noticia-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+
+  .noticia-img {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+    position: relative; overflow: hidden;
+  }
+  .noticia-img.red { background: linear-gradient(135deg, var(--red-dark), var(--red-light)); }
+  .noticia-img.dark { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .noticia-img.gold { background: linear-gradient(135deg, #7b5e1c, #c8971a); }
+
+  .noticia-featured .noticia-img { height: 240px; }
+
+  .noticia-body { padding: 24px; }
+  .noticia-meta {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
+  }
+  .noticia-cat {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--red);
+    background: rgba(192,57,43,0.08);
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .noticia-date { font-size: 12px; color: var(--muted); }
+  .noticia-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--dark); line-height: 1.35;
+    margin-bottom: 10px;
+  }
+  .noticia-featured .noticia-title { font-size: 20px; }
+  .noticia-excerpt { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── SERVICIOS ── */
+  .servicios { background: var(--dark); }
+  .servicios .section-tag { color: var(--accent); }
+  .servicios .section-tag::before { background: var(--accent); }
+  .servicios .section-title { color: white; }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 56px;
+  }
+
+  .servicio-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+    text-decoration: none;
+  }
+  .servicio-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at top left, rgba(192,57,43,0.15), transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .servicio-card:hover { border-color: rgba(192,57,43,0.3); transform: translateY(-3px); }
+  .servicio-card:hover::before { opacity: 1; }
+
+  .servicio-icon {
+    font-size: 28px; margin-bottom: 20px;
+    width: 52px; height: 52px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    display: grid; place-items: center;
+  }
+  .servicio-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: white; margin-bottom: 8px;
+  }
+  .servicio-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+  .servicio-arrow {
+    position: absolute; bottom: 24px; right: 24px;
+    color: rgba(255,255,255,0.2); font-size: 18px;
+    transition: all 0.3s;
+  }
+  .servicio-card:hover .servicio-arrow { color: var(--red); transform: translate(3px, -3px); }
+
+  /* ── CONTACTO / FOOTER ── */
+  .contacto {
+    background: white;
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 380px;
+    padding: 0;
+    overflow: hidden;
+  }
+  .contacto-left {
+    padding: 80px;
+    background: var(--red);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .contacto-left .section-tag { color: rgba(255,255,255,0.6); }
+  .contacto-left .section-tag::before { background: rgba(255,255,255,0.6); }
+  .contacto-left .section-title { color: white; margin-bottom: 24px; }
+  .contacto-address {
+    font-size: 14px; color: rgba(255,255,255,0.7);
+    line-height: 2; margin-bottom: 32px;
+  }
+  .contacto-address strong { color: white; font-weight: 500; }
+
+  .social-links { display: flex; gap: 10px; }
+  .social-link {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    color: white; text-decoration: none;
+    font-size: 16px; transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .social-link:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+  .contacto-right {
+    padding: 80px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .contacto-right .section-tag { margin-bottom: 16px; }
+  .contacto-right .section-title { margin-bottom: 32px; }
+
+  .quick-links {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .quick-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 18px;
+    background: var(--cream);
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .quick-link:hover { border-color: var(--red); background: rgba(192,57,43,0.03); }
+  .quick-link-icon { font-size: 16px; }
+  .quick-link-text { font-size: 13px; font-weight: 500; color: var(--dark); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 28px 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  footer p { font-size: 12px; color: rgba(255,255,255,0.3); }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 16px;
+    color: white; letter-spacing: -0.02em;
+  }
+  .footer-logo span { color: var(--red); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 60px 24px; }
+    section { padding: 60px 24px; }
+    .carreras-grid { grid-template-columns: 1fr; gap: 8px; }
+    .carrera-card:first-child,
+    .carrera-card:nth-child(3),
+    .carrera-card:nth-child(4),
+    .carrera-card:last-child { border-radius: 12px; }
+    .noticias-grid { grid-template-columns: 1fr; }
+    .servicios-grid { grid-template-columns: 1fr 1fr; }
+    .contacto { grid-template-columns: 1fr; }
+    .contacto-left, .contacto-right { padding: 48px 24px; }
+    .quick-links { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+    .carreras-header, .noticias-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .hero-stats { gap: 24px; }
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  .hamburger {
+    display: none;
+    background: none; border: none;
+    color: white; font-size: 22px; cursor: pointer;
+  }
+  @media (max-width: 900px) { .hamburger { display: block; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-badge">FIM</div>
+    <div class="nav-logo-text">
+      Facultad de Ingeniería
+      <span>Universidad Autónoma de Sinaloa</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#carreras">Carreras</a></li>
+    <li><a href="#noticias">Noticias</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="http://dse.uasnet.mx/alumnos" class="nav-cta" target="_blank">Portal Alumno</a></li>
+  </ul>
+  <button class="hamburger">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left fade-in visible">
+    <div class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      Ciclo 2025–2026 · Semestre 2
+    </div>
+    <h1 class="hero-title">
+      Ingeniería<br>
+      con <span class="accent">propósito</span>
+      <span class="line-indent">en Sinaloa.</span>
+    </h1>
+    <p class="hero-desc">
+      Formamos ingenieros de alto nivel con visión global, comprometidos con el desarrollo tecnológico y social de México.
+    </p>
+    <div class="hero-actions">
+      <a href="#carreras" class="btn-primary">Ver oferta educativa →</a>
+      <a href="#contacto" class="btn-secondary">Contáctanos</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6<span>+</span></div>
+        <div class="stat-label">Licenciaturas</div>
+      </div>
+      <div>
+        <div class="stat-num">50<span>+</span></div>
+        <div class="stat-label">Años de historia</div>
+      </div>
+      <div>
+        <div class="stat-num">2<span>k+</span></div>
+        <div class="stat-label">Estudiantes activos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-red-blob"></div>
+    <div class="hero-accent-blob"></div>
+
+    <div class="hero-card-stack">
+      <div class="floating-card card-main">
+        <div class="card-label">PRÓXIMO EVENTO</div>
+        <div class="card-title">Exámenes Extraordinarios</div>
+        <div class="card-sub">Semestre 2025–2026 · 2</div>
+        <div class="card-badge">Descarga tu programación →</div>
+      </div>
+      <div class="floating-card card-side">
+        <div class="card-label">COLABORACIÓN</div>
+        <div class="card-title">Clase espejo con Perú</div>
+        <div class="card-sub">Universidad Continental</div>
+      </div>
+    </div>
+
+    <div class="hero-bottom-info">
+      <div class="info-icon">📍</div>
+      <div class="info-text">
+        <strong>Los Mochis, Sinaloa</strong>
+        Fuente de Poseidón y Ángel Flores s/n · Tel. (668) 812-7641
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARRERAS -->
+<section class="carreras" id="carreras">
+  <div class="carreras-header fade-in">
+    <div>
+      <div class="section-tag">Oferta educativa</div>
+      <h2 class="section-title">Elige tu <span class="muted">carrera</span></h2>
+    </div>
+    <a href="#" class="btn-secondary" style="white-space:nowrap;">Ver planes de estudio</a>
+  </div>
+  <div class="carreras-grid fade-in">
+    <div class="carrera-card">
+      <div class="carrera-num">01</div>
+      <div class="carrera-icon">🏗️</div>
+      <div class="carrera-name">Ingeniería Civil</div>
+      <div class="carrera-desc">Diseño y construcción de infraestructura. Planes V y 2022 disponibles.</div>
+      <span class="carrera-tag">Plan V · Plan 2022</span>
+    </div>
+    <div class="carrera-card">
+      <div class="carrera-num">02</div>
+      <div class="carrera-icon">🗺️</div>
+      <div class="carrera-name">Ingeniería Geodésica</div>
+      <div class="carrera-desc">Medición y representación del territorio con tecnología de punta.</div>
+      <span class="carrera-tag">Plan III · Plan 2022</span>
+    </div>
+    <div class="carrera-card">
+      <div class="carrera-num">03</div>
+      <div class="carrera-icon">💻</div>
+      <div class="carrera-name">Ingeniería de Software</div>
+      <div class="carrera-desc">Desarrollo de sistemas y aplicaciones. Modalidad presencial y virtual.</div>
+      <span class="carrera-tag">Presencial · Virtual</span>
+    </div>
+    <div class="carrera-card">
+      <div class="carrera-num">04</div>
+      <div class="carrera-icon">⚙️</div>
+      <div class="carrera-name">Ing. en Procesos Industriales</div>
+      <div class="carrera-desc">Optimización y automatización de procesos productivos industriales.</div>
+      <span class="carrera-tag">Plan 2022</span>
+    </div>
+    <div class="carrera-card">
+      <div class="carrera-num">05</div>
+      <div class="carrera-icon">⚡</div>
+      <div class="carrera-name">Ing. en Nanotecnología y Energías Renovables</div>
+      <div class="carrera-desc">Tecnologías del futuro para un planeta más sostenible.</div>
+      <span class="carrera-tag">Plan 2022</span>
+    </div>
+    <div class="carrera-card" style="background:var(--red); border-radius: 0 0 16px 0;">
+      <div class="carrera-num" style="color:rgba(255,255,255,0.1);">+</div>
+      <div class="carrera-icon">🎓</div>
+      <div class="carrera-name" style="color:white;">Posgrado</div>
+      <div class="carrera-desc" style="color:rgba(255,255,255,0.65);">Maestría y Doctorado en Ciencias de la Ingeniería. Programa reconocido por SECIHTI.</div>
+      <span class="carrera-tag" style="background:rgba(255,255,255,0.15);color:white;">Maestría · Doctorado</span>
+    </div>
+  </div>
+</section>
+
+<!-- NOTICIAS -->
+<section class="noticias" id="noticias">
+  <div class="noticias-header fade-in">
+    <div>
+      <div class="section-tag">Últimas noticias</div>
+      <h2 class="section-title">Lo que <span class="muted">ocurre</span> en FIM</h2>
+    </div>
+    <a href="#" class="btn-secondary" style="white-space:nowrap;">Ver todas</a>
+  </div>
+  <div class="noticias-grid fade-in">
+    <div class="noticia-card noticia-featured">
+      <div class="noticia-img red">🏆</div>
+      <div class="noticia-body">
+        <div class="noticia-meta">
+          <span class="noticia-cat">Orgullo FIM</span>
+          <span class="noticia-date">Mayo 2025</span>
+        </div>
+        <div class="noticia-title">Estudiante de IC gana 2do lugar en Campeonato Nacional Junior de Powerlifting</div>
+        <div class="noticia-excerpt">Jorge Daniel Valenzuela Beltrán triunfa en el XVI Campeonato Nacional Junior celebrado en Mazatlán, representando con orgullo a nuestra Facultad.</div>
+      </div>
+    </div>
+    <div class="noticia-card">
+      <div class="noticia-img dark">🌎</div>
+      <div class="noticia-body">
+        <div class="noticia-meta">
+          <span class="noticia-cat">Internacionalización</span>
+          <span class="noticia-date">2025</span>
+        </div>
+        <div class="noticia-title">Clases espejo con Universidad Continental – Perú</div>
+        <div class="noticia-excerpt">Colaboración internacional mediante aulas virtuales compartidas con estudiantes peruanos.</div>
+      </div>
+    </div>
+    <div class="noticia-card">
+      <div class="noticia-img gold">📋</div>
+      <div class="noticia-body">
+        <div class="noticia-meta">
+          <span class="noticia-cat">Académico</span>
+          <span class="noticia-date">2025–2026·2</span>
+        </div>
+        <div class="noticia-title">Programación de exámenes extraordinarios disponible</div>
+        <div class="noticia-excerpt">Ya puedes consultar la calendarización de extraordinarios para todos los programas educativos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="fade-in">
+    <div class="section-tag">Servicios</div>
+    <h2 class="section-title" style="max-width:500px;">Todo lo que necesitas<br><span style="color:rgba(255,255,255,0.3);">en un solo lugar.</span></h2>
+  </div>
+  <div class="servicios-grid fade-in">
+    <a href="http://dse.uasnet.mx/alumnos" target="_blank" class="servicio-card">
+      <div class="servicio-icon">🎓</div>
+      <div class="servicio-name">Portal Alumno</div>
+      <div class="servicio-desc">Accede a calificaciones, horarios y trámites escolares en línea.</div>
+      <span class="servicio-arrow">↗</span>
+    </a>
+    <a href="http://siia.uasnet.mx/empleado" target="_blank" class="servicio-card">
+      <div class="servicio-icon">👨‍🏫</div>
+      <div class="servicio-name">Portal Docente</div>
+      <div class="servicio-desc">Sistema de información institucional para profesores.</div>
+      <span class="servicio-arrow">↗</span>
+    </a>
+    <a href="https://sit.uas.edu.mx/alumnos/" target="_blank" class="servicio-card">
+      <div class="servicio-icon">🤝</div>
+      <div class="servicio-name">Tutorías</div>
+      <div class="servicio-desc">Programa de apoyo académico y orientación estudiantil.</div>
+      <span class="servicio-arrow">↗</span>
+    </a>
+    <a href="http://diplouasvirtual.net/ing_mochis" target="_blank" class="servicio-card">
+      <div class="servicio-icon">💡</div>
+      <div class="servicio-name">Plataforma Virtual</div>
+      <div class="servicio-desc">Acceso a cursos en línea y material educativo digital.</div>
+      <span class="servicio-arrow">↗</span>
+    </a>
+    <a href="#" class="servicio-card">
+      <div class="servicio-icon">📄</div>
+      <div class="servicio-name">Servicio Social</div>
+      <div class="servicio-desc">Trámites y registro para el servicio social obligatorio.</div>
+      <span class="servicio-arrow">↗</span>
+    </a>
+    <a href="#" class="servicio-card">
+      <div class="servicio-icon">💼</div>
+      <div class="servicio-name">Bolsa de Trabajo</div>
+      <div class="servicio-desc">Oportunidades laborales para egresados y próximos a titularse.</div>
+      <span class="servicio-arrow">↗</span>
+    </a>
+    <a href="#" class="servicio-card">
+      <div class="servicio-icon">🏅</div>
+      <div class="servicio-name">Titulación</div>
+      <div class="servicio-desc">Comisión académica y trámites para obtener tu título profesional.</div>
+      <span class="servicio-arrow">↗</span>
+    </a>
+    <a href="http://uasposing.org" target="_blank" class="servicio-card">
+      <div class="servicio-icon">🔬</div>
+      <div class="servicio-name">Posgrado</div>
+      <div class="servicio-desc">Maestría y Doctorado reconocidos por SECIHTI.</div>
+      <span class="servicio-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="contacto-left fade-in">
+    <div class="section-tag">Encuéntranos</div>
+    <h2 class="section-title">Visítanos<br>en Los Mochis</h2>
+    <div class="contacto-address">
+      <strong>Facultad de Ingeniería Mochis</strong>
+      Fuente de Poseidón y Ángel Flores s/n<br>
+      Col. Jiquilpan Módulo B2<br>
+      Los Mochis, Sinaloa, México<br>
+      <strong>Tel. (668) 812-7641</strong>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/uasfim" class="social-link" target="_blank" title="Facebook">f</a>
+      <a href="http://youtube.com/uasfim" class="social-link" target="_blank" title="YouTube">▶</a>
+      <a href="https://www.instagram.com/fim_uas" class="social-link" target="_blank" title="Instagram">◎</a>
+      <a href="#" class="social-link" target="_blank" title="X / Twitter">𝕏</a>
+    </div>
+  </div>
+  <div class="contacto-right fade-in">
+    <div class="section-tag">Accesos rápidos</div>
+    <h2 class="section-title">Links <span class="muted">útiles</span></h2>
+    <div class="quick-links">
+      <a href="#" class="quick-link"><span class="quick-link-icon">📅</span><span class="quick-link-text">Calendario Escolar</span></a>
+      <a href="#" class="quick-link"><span class="quick-link-icon">📋</span><span class="quick-link-text">Normatividad</span></a>
+      <a href="#" class="quick-link"><span class="quick-link-icon">🏛️</span><span class="quick-link-text">Directorio</span></a>
+      <a href="#" class="quick-link"><span class="quick-link-icon">📊</span><span class="quick-link-text">Transparencia</span></a>
+      <a href="#" class="quick-link"><span class="quick-link-icon">🎖️</span><span class="quick-link-text">Certificación</span></a>
+      <a href="#" class="quick-link"><span class="quick-link-icon">📚</span><span class="quick-link-text">Cuerpos Académicos</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">FIM<span>·</span>UAS</div>
+  <p>© 2026 Facultad de Ingeniería Mochis – Universidad Autónoma de Sinaloa. Todos los derechos reservados.</p>
+  <p style="color:rgba(255,255,255,0.15);">Los Mochis, Sinaloa · México</p>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
