@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rivera Camacho Sergio - Practica 20</title>
+</head>
+<body>
+
+  <h1>Operaciones Aritméticas en JavaScript</h1>
+
+  <p>
+    a = <input type="number" id="a" value="10">
+    b = <input type="number" id="b" value="2">
+    <button onclick="calcular()">Calcular</button>
+  </p>
+
+  <hr>
+
+  <p id="suma"></p>
+  <p id="resta"></p>
+  <p id="division"></p>
+  <p id="exponenciacion"></p>
+
+  <script>
+    function calcular() {
+      var a = Number(document.getElementById("a").value);
+      var b = Number(document.getElementById("b").value);
+
+      document.getElementById("suma").innerHTML          = "Suma:           " + a + " + " + b + " = " + (a + b);
+      document.getElementById("resta").innerHTML         = "Resta:          " + a + " - " + b + " = " + (a - b);
+      document.getElementById("division").innerHTML      = "División:       " + a + " / " + b + " = " + (a / b);
+      document.getElementById("exponenciacion").innerHTML = "Exponenciación: " + a + " ** " + b + " = " + (a ** b);
+    }
+  </script>
+
+</body>
+</html>
