@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de IMC - Mujer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    h1 { color: #c0396b; }
+    input {
+      padding: 5px;
+      width: 200px;
+    }
+    button {
+      padding: 8px 20px;
+      background: #c0396b;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover { background: #a02d59; }
+    #resultado, #clasificacion {
+      background: #f9f9f9;
+      border-left: 4px solid #c0396b;
+      padding: 10px;
+      margin-top: 8px;
+    }
+    table { border-collapse: collapse; width: 100%; }
+    th { background: #c0396b; color: white; padding: 8px; }
+    td { padding: 6px 8px; }
+    tr:nth-child(even) { background: #f2f2f2; }
+  </style>
+</head>
+<body>
+
+  <h1>Calculadora de IMC - Mujer</h1>
+  <p>Fórmula: IMC = peso (kg) / estatura² (m)</p>
+
+  <hr>
+
+  <form>
+    <label>Nombre: <input type="text" id="nombre"></label><br><br>
+    <label>Peso (kg): <input type="number" id="peso" step="0.1"></label><br><br>
+    <label>Estatura (m): <input type="number" id="estatura" step="0.01"></label><br><br>
+    <button type="button" onclick="calcularIMC()">Calcular IMC</button>
+  </form>
+
+  <hr>
+
+  <h2>Resultado:</h2>
+  <p id="resultado"></p>
+  <p id="clasificacion"></p>
+
+  <hr>
+
+  <h2>Tabla de clasificación IMC</h2>
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>IMC (kg/m²)</th>
+      <th>Clasificación</th>
+    </tr>
+    <tr><td>Menos de 18.5</td><td>Peso insuficiente</td></tr>
+    <tr><td>18.5 – 24.99</td><td>Normopeso (peso normal)</td></tr>
+    <tr><td>25 – 26.9</td><td>Sobrepeso grado I</td></tr>
+    <tr><td>27 – 29.9</td><td>Sobrepeso grado II (preobesidad)</td></tr>
+    <tr><td>30 – 34.9</td><td>Obesidad tipo I</td></tr>
+    <tr><td>35 – 39.9</td><td>Obesidad tipo II</td></tr>
+    <tr><td>40 – 49.9</td><td>Obesidad tipo III (mórbida)</td></tr>
+    <tr><td>50 o más</td><td>Obesidad tipo IV (extrema)</td></tr>
+  </table>
+
+  <script>
+    function calcularIMC() {
+      var nombre   = document.getElementById("nombre").value;
+      var peso     = Number(document.getElementById("peso").value);
+      var estatura = Number(document.getElementById("estatura").value);
+
+      // Validar que los campos no estén vacíos o en cero :P
+      if (peso <= 0 || estatura <= 0) {
+        document.getElementById("resultado").innerHTML = "Por favor ingresa valores válidos.";
+        document.getElementById("clasificacion").innerHTML = "";
+        return;
+      }
+
+      // Fórmula IMC = peso / estatura²
+      var imc = peso / (estatura * estatura);
+      var imcRedondeado = imc.toFixed(2);
+
+      // Clasificación según el IMC
+      var clasificacion = "";
+
+      if (imc < 18.5) {
+        clasificacion = "Peso insuficiente";
+      } else if (imc < 25) {
+        clasificacion = "Normopeso (peso normal)";
+      } else if (imc < 27) {
+        clasificacion = "Sobrepeso grado I";
+      } else if (imc < 30) {
+        clasificacion = "Sobrepeso grado II (preobesidad)";
+      } else if (imc < 35) {
+        clasificacion = "Obesidad tipo I";
+      } else if (imc < 40) {
+        clasificacion = "Obesidad tipo II";
+      } else if (imc < 50) {
+        clasificacion = "Obesidad tipo III (mórbida)";
+      } else {
+        clasificacion = "Obesidad tipo IV (extrema)";
+      }
+
+      document.getElementById("resultado").innerHTML =
+        "Nombre: " + nombre + "<br>" +
+        "Peso: " + peso + " kg | Estatura: " + estatura + " m<br>" +
+        "<b>IMC: " + imcRedondeado + " kg/m²</b>";
+
+      document.getElementById("clasificacion").innerHTML =
+        "Clasificación: <b>" + clasificacion + "</b>";
+    }
+  </script>
+
+</body>
+</html>
