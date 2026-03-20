@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rivera Camacho Sergio - Practica 21</title>
+</head>
+<body>
+
+  <h1>Operaciones Aritméticas con Formulario</h1>
+
+  <form>
+    <label>Variable a: <input type="number" id="a" value="0"></label><br><br>
+    <label>Variable b: <input type="number" id="b" value="0"></label><br><br>
+
+    <button type="button" onclick="sumar()">Suma</button>
+    <button type="button" onclick="restar()">Resta</button>
+    <button type="button" onclick="dividir()">División</button>
+    <button type="button" onclick="exponenciar()">Exponenciación</button>
+  </form>
+
+  <hr>
+
+  <h2>Resultado:</h2>
+  <p id="resultado"></p>
+
+  <script>
+    function obtenerValores() {
+      var a = Number(document.getElementById("a").value);
+      var b = Number(document.getElementById("b").value);
+      return { a, b };
+    }
+
+    function sumar() {
+      var v = obtenerValores();
+      document.getElementById("resultado").innerHTML =
+        "Suma: " + v.a + " + " + v.b + " = " + (v.a + v.b);
+    }
+
+    function restar() {
+      var v = obtenerValores();
+      document.getElementById("resultado").innerHTML =
+        "Resta: " + v.a + " - " + v.b + " = " + (v.a - v.b);
+    }
+
+    function dividir() {
+      var v = obtenerValores();
+      document.getElementById("resultado").innerHTML =
+        "División: " + v.a + " / " + v.b + " = " + (v.a / v.b);
+    }
+
+    function exponenciar() {
+      var v = obtenerValores();
+      document.getElementById("resultado").innerHTML =
+        "Exponenciación: " + v.a + " ** " + v.b + " = " + (v.a ** v.b);
+    }
+  </script>
+
+</body>
+</html>
