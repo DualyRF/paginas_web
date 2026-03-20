@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rivera Camacho Sergio - Practica 22 </title>
+</head>
+<body>
+
+  <h1>Ecuación de Segundo Grado</h1>
+  <p>Fórmula: ax² + bx + c = 0</p>
+  <p>Solución: x = (-b ± √(b² - 4ac)) / 2a</p>
+
+  <hr>
+
+  <form>
+    <label>a = <input type="number" id="a" value="1"></label><br><br>
+    <label>b = <input type="number" id="b" value="5"></label><br><br>
+    <label>c = <input type="number" id="c" value="6"></label><br><br>
+    <button type="button" onclick="resolver()">Resolver</button>
+  </form>
+
+  <hr>
+
+  <h2>Resultado:</h2>
+  <p id="resultado"></p>
+
+  <script>
+    function resolver() {
+      var a = Number(document.getElementById("a").value);
+      var b = Number(document.getElementById("b").value);
+      var c = Number(document.getElementById("c").value);
+
+      // Discriminante: lo que está dentro de la raíz
+      var discriminante = (b * b) - (4 * a * c);
+
+      if (discriminante > 0) {
+        // Dos soluciones reales
+        var x1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+        var x2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+        document.getElementById("resultado").innerHTML =
+          "Discriminante: " + discriminante + "<br>" +
+          "x1 = " + x1 + "<br>" +
+          "x2 = " + x2;
+
+      } else if (discriminante === 0) {
+        // Una sola solución
+        var x = -b / (2 * a);
+        document.getElementById("resultado").innerHTML =
+          "Discriminante: " + discriminante + "<br>" +
+          "Una sola solución: x = " + x;
+
+      } else {
+        // Sin solución real (discriminante negativo)
+        document.getElementById("resultado").innerHTML =
+          "Discriminante: " + discriminante + "<br>" +
+          "No tiene solución real (discriminante negativo)";
+      }
+    }
+  </script>
+
+</body>
+</html>
