@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rivera Camacho Sergio - Practica 19</title>
+</head>
+<body>
+
+  <h1>JavaScript Output</h1>
+  <p>Ejemplos de las formas de mostrar datos en JavaScript.</p>
+
+  <hr>
+
+  <h2>1. innerHTML</h2>
+  <p>Cambia el contenido HTML de un elemento. Puede incluir etiquetas como &lt;b&gt;.</p>
+  <p id="demo1">Aquí aparecerá el resultado</p>
+  <button onclick="usarInnerHTML()">Ejecutar</button>
+
+  <hr>
+
+  <h2>2. innerText</h2>
+  <p>Cambia solo el texto de un elemento. No interpreta etiquetas HTML.</p>
+  <p id="demo2">Aquí aparecerá el resultado</p>
+  <button onclick="usarInnerText()">Ejecutar</button>
+
+  <hr>
+
+  <h2>3. document.write()</h2>
+  <p>Escribe en el documento. Si se llama después de cargar la página, borra todo el HTML.</p>
+  <p id="demo3">Aquí aparecerá el resultado (simulado)</p>
+  <button onclick="usarDocWrite()">Ejecutar</button>
+
+  <hr>
+
+  <h2>4. window.alert()</h2>
+  <p>Muestra un cuadro emergente con un mensaje.</p>
+  <button onclick="usarAlert()">Ejecutar</button>
+
+  <hr>
+
+  <h2>5. console.log()</h2>
+  <p>Muestra datos en la consola del navegador. Abre con F12 → Console.</p>
+  <p id="demo5">Presiona el botón y abre F12</p>
+  <button onclick="usarConsole()">Ejecutar</button>
+
+  <hr>
+
+  <h2>6. window.print()</h2>
+  <p>Abre el diálogo de impresión del navegador.</p>
+  <button onclick="window.print()">Imprimir página</button>
+
+  <script>
+    // 1. innerHTML
+    function usarInnerHTML() {
+      document.getElementById("demo1").innerHTML = "Hola Mundo!";
+    }
+
+    // 2. innerText
+    function usarInnerText() {
+      document.getElementById("demo2").innerText = "Hola Mundo!";
+    }
+
+    // 3. document.write — simulado para no borrar la página
+    function usarDocWrite() {
+      document.getElementById("demo3").innerHTML = "Hola Mundo!";
+    }
+
+    // 4. window.alert
+    function usarAlert() {
+      window.alert("Hola Mundo!");
+    }
+
+    // 5. console.log — visible en F12 → Console
+    function usarConsole() {
+      console.log("Hola Mundo!");
+      document.getElementById("demo5").innerText =
+        "Datos enviados a la consola. Abre F12 → Console.";
+    }
+  </script>
+
+</body>
+</html>
